@@ -44,9 +44,9 @@ class Post(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(255))
+    name = db.Column(db.String(255), nullable=False)
     text = db.Column(db.Text())
-    date= db.Column(db.DateTime())
+    date= db.Column(db.DateTime(), default=datetime.datetime.now)
     post_id = db.Column(db.Integer(), db.ForeignKey('post.id'))
 
     def __init__(self, name):
@@ -57,7 +57,7 @@ class Comment(db.Model):
 
 class Tag(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    title = db.Column(db.String(255))
+    title = db.Column(db.String(255), nullable=False, unique=True)
 
     def __init__(self, title):
         self.title = title
