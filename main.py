@@ -2,12 +2,14 @@ import datetime
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from config import DevConfig
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 tags = db.Table('post_tags',
     db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
